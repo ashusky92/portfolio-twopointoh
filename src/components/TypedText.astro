@@ -1,0 +1,29 @@
+---
+import { v4 as uuid } from "uuid";
+
+const { typedText, speed = 50 } = Astro.props;
+
+const componentId = uuid();
+---
+
+<span class="typed-text--container"
+  ><span id={"typedText-container-" + componentId}></span></span
+>
+
+<script define:vars={{ typedText, speed, componentId }}>
+  const textArr = typedText.trim().split("");
+  const container = document.getElementById(
+    "typedText-container-" + componentId
+  );
+  let i = 0;
+
+  function typeWriter() {
+    if (i < textArr.length) {
+      container.innerHTML += textArr[i];
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  typeWriter();
+</script>

@@ -1,0 +1,37 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import ProjectCard from "../components/ui/ProjectCard.astro";
+
+import projectData from "../data/projects.json";
+---
+
+<PageLayout>
+  <h1>Projects</h1>
+  <div class="projects-list">
+    {
+      projectData.map(function (project) {
+        return (
+          <ProjectCard
+            projectTitle={project.title}
+            imageSource={project.image.source}
+            imageAltText={project.image["alt-text"]}
+            projectId={project._id}
+          />
+        );
+      })
+    }
+  </div>
+  <div class="projects-container"></div>
+</PageLayout>
+
+<style lang="scss">
+  .projects-list {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+
+    @media (max-width: 766px) {
+      grid-template-columns: auto;
+    }
+  }
+</style>

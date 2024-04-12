@@ -1,0 +1,23 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+
+const titleOptions = [
+  "Where ya goin?",
+  "Lost?",
+  "This is not the page you're looking for!",
+  "Too much caffeine?",
+  "You've reached a dead end!",
+  "Put a little more than creamer in your coffe, eh?",
+  "You've just reached Neverland, cuz that page NEVER existed...",
+  "",
+];
+---
+
+<PageLayout>
+  <h1>404</h1>
+  <h2>{titleOptions[Math.floor(Math.random() * titleOptions.length)]}</h2>
+  <p>
+    {Astro.url.pathname === "/404" ? "Page" : Astro.url.pathname} doesn't exist...
+  </p>
+  <a href="/">Go to my homepage!</a>
+</PageLayout>

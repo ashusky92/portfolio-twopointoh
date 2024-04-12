@@ -1,0 +1,56 @@
+---
+const currYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="copyright">
+    Alex Husky &copy; {currYear}
+  </div>
+  <div class="socials-container">
+    <span>Check out <i class="fa-solid fa-arrow-right"></i></span>
+    <a href="https://github.com/ashusky92" target="_blank"
+      ><i class="fa-brands fa-github"></i> My Repo</a
+    >
+    <a href="https://www.linkedin.com/in/alex-husky/" target="_blank"
+      ><i class="fa-brands fa-linkedin"></i> My LinkedIn</a
+    >
+  </div>
+</footer>
+
+<style lang="scss">
+  footer {
+    display: grid;
+    grid-template-areas: "copyright socials";
+    justify-content: space-around;
+    margin-top: 50px;
+    background-color: #0e141b;
+    padding: 15px 0;
+    width: 100%;
+
+    @media (max-width: 766px) {
+      grid-template-areas: "copyright" "socials";
+      gap: 25px;
+      text-align: center;
+    }
+  }
+
+  footer .socials-container {
+    display: flex;
+    gap: 15px;
+    grid-area: socials;
+
+    a {
+      text-decoration: none;
+      background-color: var(--primary-background);
+      color: white;
+    }
+    span {
+      color: var(--tertiary-color);
+      font-weight: bold;
+    }
+  }
+
+  .copyright {
+    grid-area: copyright;
+  }
+</style>

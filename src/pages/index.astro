@@ -1,0 +1,286 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+import TypedText from "../components/TypedText.astro";
+---
+
+<PageLayout title="Home" hideHeader="true" hideFooter="true">
+  <div class="hero">
+    <div class="video-container">
+      <video autoplay muted loop id="heroVideo">
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="content">
+      <div class="hero--header__desktop">
+        <h1>
+          &gt; <TypedText typedText="Alex Husky" speed="90" /><span
+            class="blinking">_</span
+          >
+        </h1>
+        <h2>&lt; Web-Developer /&gt;</h2>
+      </div>
+      <div class="hero--header__mobile">
+        <h1>&gt; Alex Husky_</h1>
+        <h2>&lt; Web-Developer /&gt;</h2>
+      </div>
+
+      <div class="home-nav">
+        <ul>
+          <li><a href="/projects">My projects</a></li>
+          <li><a href="/contact">Contact me</a></li>
+        </ul>
+      </div>
+
+      <div class="about">
+        <h3>Please don't call me Alexander...</h3>
+        <p>
+          I'm a front-end web developer fluent in JavaScript, with some
+          experience in Node.js, React, Vue, and (very recently) Astro. I'm
+          seeking a developer opportunities to advance my skills through
+          hands-on learning and mentorship. I love coding, enjoy fun projects,
+          and am always eager to connect with seasoned devs. Reach out if you
+          have a good JavaScript joke, want to know more about me, or are
+          looking for a passionate coder!
+        </p>
+        <p>I look forward to connecting!</p>
+        <a class="resume" href="/Resume-Alex-Husky.pdf" target="_blank"
+          >Check Out My Resume</a
+        >
+      </div>
+      <div class="hero-socials">
+        <ul>
+          <li class="label">
+            More Fun <i class="fa-solid fa-arrow-right"></i>
+          </li>
+          <li>
+            <a
+              href="https://github.com/ashusky92"
+              title="Check out my Github!"
+              target="_blank"><i class="fa-brands fa-github"></i></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/alex-husky/"
+              title="Check out my LinkedIn Profile!"
+              target="_blank"><i class="fa-brands fa-linkedin"></i></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<style lang="scss">
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 4em;
+    font-family: var(--title-font);
+    margin: 0 0 15px;
+  }
+
+  h2 {
+    font-weight: normal;
+  }
+
+  .hero {
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+
+    .hero--header {
+      &__desktop {
+        @media (max-width: 991px) {
+          display: none;
+        }
+      }
+
+      &__mobile {
+        @media (min-width: 992px) {
+          display: none;
+        }
+      }
+    }
+
+    .video-container {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      @media (max-width: 767px) {
+        display: none;
+      }
+
+      iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .content {
+      z-index: 20;
+      min-width: 100vw;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      > * {
+        z-index: 10;
+      }
+
+      &::before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(135deg, var(--primary-background), #29295a);
+        opacity: 75%;
+      }
+    }
+
+    .decoration {
+      font-weight: bold;
+      font-size: 1.5em;
+      text-align: center;
+      margin: 20px 0 30px;
+    }
+  }
+
+  .about {
+    margin: 0 auto;
+    padding: 15px 25px;
+    font-size: 18px;
+    max-width: 992px;
+    border-left: 5px solid var(--secondary-color);
+    border-bottom: 5px solid var(--secondary-color);
+    background: var(--primary-background);
+    border-radius: 20px;
+
+    h3 {
+      color: var(--tertiary-color);
+    }
+
+    @media (max-width: 767px) {
+      margin: 0 15px;
+    }
+
+    a.resume {
+      display: inline-block;
+      background-color: var(--tertiary-color);
+      padding: 5px 10px;
+      color: black;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.15s ease-in;
+      margin-top: 10px;
+
+      &:hover {
+        background-color: var(--secondary-color);
+        color: white;
+        box-shadow: -5px 5px 0 var(--tertiary-color);
+      }
+
+      @media (max-width: 767px) {
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+    }
+  }
+
+  .home-nav {
+    @media (max-width: 776px) {
+      width: 90%;
+    }
+  }
+
+  .home-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 10px 0;
+    list-style: none;
+
+    a {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      background-color: var(--primary-background);
+      border: 2px solid #ffff;
+      // border-radius: 20px;
+      padding: 10px 15px;
+      font-size: 1.15em;
+      transition: 0.15s ease-in;
+
+      @media (max-width: 767px) {
+        background-color: white;
+        color: black;
+        box-shadow:
+          -5px 5px 0 var(--secondary-color),
+          5px -5px 0 var(--tertiary-color);
+      }
+
+      &:hover {
+        background-color: #ffff;
+        color: black;
+        box-shadow:
+          5px 5px 0 var(--tertiary-color),
+          -5px -5px 0 var(--secondary-color);
+      }
+
+      @media (max-width: 767px) {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      gap: 20px;
+      align-content: stretch;
+    }
+  }
+
+  .hero-socials {
+    ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      gap: 15px;
+      a {
+        color: var(--tertiary-color);
+        font-size: 2em;
+
+        &:hover {
+          color: var(--secondary-color);
+        }
+      }
+
+      li.label {
+        font-size: 18px;
+      }
+    }
+  }
+</style>

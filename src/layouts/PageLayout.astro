@@ -1,0 +1,100 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "@fontsource/vt323";
+
+const {
+  title = Astro.url.pathname.replace("/", "").toUpperCase(),
+  hideHeader,
+  hideFooter,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Alex Husky | {title}</title>
+
+    <!-- Font Awesome CDN -->
+    <script
+      src="https://kit.fontawesome.com/348e7a68b2.js"
+      crossorigin="anonymous"></script>
+  </head>
+  <body class={Astro.url.pathname.replace(/\//g, "")}>
+    {!hideHeader && <Header />}
+    <main class={!/^\/$/.test(Astro.url.pathname) ? "internal-page" : ""}>
+      <slot />
+    </main>
+    {!hideFooter && <Footer />}
+  </body>
+</html>
+<style is:global>
+  :root {
+    --primary-background: #0e141b;
+    --secondary-color: #bb342f;
+    --tertiary-color: #e0ca3c;
+    --title-font: "VT323", serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: linear-gradient(135deg, var(--primary-background), #29295a);
+    color: #ffff;
+    font-family: "Arial", sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    min-height: 100svh;
+    border-top: 1px solid transparent;
+  }
+
+  @media (min-width: 767px) {
+    header {
+      height: 7lvh;
+    }
+
+    main {
+      min-height: 78lvh;
+    }
+
+    footer {
+      height: 7lvh;
+    }
+  }
+
+  main.internal-page {
+    max-width: 992px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .blinking {
+    @media (min-width: 767px) {
+      animation: blinking 0.75s infinite;
+    }
+  }
+
+  @keyframes blinking {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+</style>

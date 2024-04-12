@@ -1,0 +1,125 @@
+---
+import Navigation from "./Navigation.astro";
+const { pageHeader = "" } = Astro.props;
+---
+
+<header>
+  <h1><a href="/">&gt; Alex Husky<span class="blinking">_</span></a></h1>
+  <div class="header-nav">
+    <div class="menu-label">Menu:</div>
+    <Navigation />
+  </div>
+</header>
+
+<style lang="scss">
+  header {
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    grid-template-areas: "headerText headerNav";
+
+    > h1 {
+      font-family: var(--title-font);
+      grid-area: headerText;
+      a {
+        color: #ffff;
+        text-decoration: none;
+        @media (max-width: 766px) {
+          text-align: center;
+        }
+      }
+    }
+
+    .header-nav {
+      grid-area: headerNav;
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+
+      .menu-label {
+        margin-right: 15px;
+        color: var(--secondary-color);
+        font-weight: bold;
+        font-family: var(--title-font);
+        font-size: 1.5em;
+
+        @media (max-width: 766px) {
+          display: none;
+        }
+      }
+    }
+
+    @media (max-width: 766px) {
+      grid-template-areas: "headerText" "headerNav";
+      justify-content: center;
+      background-color: var(--primary-background);
+    }
+  }
+
+  :global(.header-nav nav) {
+    background-color: var(--primary-background);
+  }
+
+  :global(.header-nav a) {
+    color: #ffff;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 5px;
+    transition: all 0.1s ease-in;
+    font-size: 18px;
+
+    &.active-page {
+      position: relative;
+
+      &::before {
+        content: "[ ";
+        color: var(--tertiary-color);
+        font-size: 30px;
+        position: absolute;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        @media (max-width: 767px) {
+          transform: translateY(-60%);
+        }
+      }
+
+      &::after {
+        content: " ]";
+        color: var(--tertiary-color);
+        font-size: 30px;
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+
+        @media (max-width: 767px) {
+          transform: translateY(-60%);
+        }
+      }
+    }
+
+    @media (max-width: 766px) {
+    }
+  }
+
+  :global(.header-nav a:hover) {
+    color: #ffff;
+    text-decoration: underline;
+  }
+
+  :global(.header-nav ul) {
+    display: flex;
+    gap: 20px;
+    padding: 0 10px;
+
+    @media (max-width: 766px) {
+      justify-content: center;
+      padding: 0;
+      gap: 25px;
+    }
+  }
+</style>

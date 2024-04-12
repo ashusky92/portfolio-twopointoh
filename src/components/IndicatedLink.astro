@@ -1,0 +1,12 @@
+---
+const { label, url, target = "" } = Astro.props;
+const pageRegex = new RegExp(url, "i");
+---
+
+<a
+  class={pageRegex.test(Astro.url.pathname) ? "active-page" : ""}
+  href={url}
+  target={target ? target : ""}
+>
+  {label}
+</a>

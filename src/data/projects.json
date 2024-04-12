@@ -1,0 +1,66 @@
+[
+    {
+        "_id": "0",
+        "title": "Movin' Out Moving",
+        "description": "This is a simple site my friend asked me to put together for his new business.  He mostly wanted a place to list out his services and simple means of communication that he can be reached at.",
+        "languages": ["HTML", "CSS"],
+        "link": {
+            "url": "https://movinoutmoving.com/",
+            "external": true
+        },
+        "repo":"",
+        "image": {
+            "source": "/images/movin-out-moving-screenshot.png",
+            "alt-text": "Movin' Out Moving Screenshot"
+        },
+        "platform": ""
+    },
+    {
+        "_id": "1",
+        "title": "Omelette Recipe Page",
+        "description": "Fun little project that I got from Front End Mentor.  The project was to build a recipe page from scratch.  I was able to accomplish this with ease as I mostly did it to learn the platform.",
+        "languages": ["HTML", "CSS"],
+        "link": {
+            "url": "https://ashusky92.github.io/recipe-page/",
+            "external": true
+        },
+        "repo":"https://github.com/ashusky92/recipe-page",
+        "image": {
+            "source": "/images/omlette-recipe-screenshot.png",
+            "alt-text": "Omelette Recipe Page Screenshot"
+        },
+        "platform": "Front-End Mentor"
+    },
+    {
+        "_id": "2",
+        "title": "FAQ Accordion Card",
+        "description": "My second projectsfrom Front End Mentor.  In this project, I was instructed to build an FAQ accordian page.  Copy and mockup provided.  I did get a little hung up on the accordian functionality as I typically use bootstrap for such a feature.",
+        "languages": ["HTML", "CSS"],
+        "link": {
+            "url": "https://ashusky92.github.io/faq-accordion-card/",
+            "external": true
+        },
+        "repo":"https://github.com/ashusky92/faq-accordion-card",
+        "image": {
+            "source": "https://res.cloudinary.com/dz209s6jk/image/upload/f_auto,q_auto,w_900/Screenshots/uv3eux4ehewvomzsoa3m.jpg",
+            "alt-text": "FAQ Accordion Card Screenshot"
+        },
+        "platform": "Front-End Mentor"
+    },
+    {
+        "_id": "3",
+        "title": "Porfolio Site 2.0",
+        "description": "The current site you're on!  This site is a combination of most of the skills I've learned over the last 5 years.  This site is built using Astro, which is a JavaScript frame work that handles both front-end and back-end.  I designed everything myself (with some slight inpiration from sites I found in my research phase).",
+        "languages": ["HTML", "CSS", "JavaScript", "NodeJs" ,"Astro", "Component-Based Development"],
+        "link": {
+            "url": "/",
+            "external": false
+        },
+        "repo":"",
+        "image": {
+            "source": "/images/portfolio-screenshot.png",
+            "alt-text": "Alex Husky Portfolio Site"
+        },
+        "platform": ""
+    }
+]

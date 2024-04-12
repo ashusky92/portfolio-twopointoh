@@ -1,0 +1,53 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout>
+  <h1>Contact Me</h1>
+  <div class="form-header">
+    <div class="linked-in">
+      <a href="https://www.linkedin.com/in/alex-husky/" target="_blank"
+        >Message me on LinkedIn <i class="fa-brands fa-linkedin"></i></a
+      >
+    </div>
+    <p>-- OR --</p>
+    <h2>Fill out the form below.</h2>
+  </div>
+  <script
+    type="text/javascript"
+    src="https://form.jotform.com/jsform/220847541793059"></script>
+</PageLayout>
+
+<style lang="scss">
+  $linkedin-color: #0077b5;
+
+  h1 {
+    text-align: center;
+  }
+
+  .form-header {
+    text-align: center;
+  }
+
+  .linked-in {
+    margin-top: 50px;
+    a {
+      background-color: #ffff;
+      color: var(--primary-background);
+      display: block;
+      font-size: 22px;
+      text-decoration: none;
+      margin: 0 auto;
+      max-width: 500px;
+      width: 100%;
+      border-radius: 30px;
+      padding: 10px;
+      transition: all 0.15s ease-in-out;
+
+      &:hover {
+        background-color: $linkedin-color;
+        color: #ffff;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,140 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import projectData from "../../data/projects.json";
+
+const { id } = Astro.params;
+
+const targProject = projectData.filter(function (project) {
+  return project._id === id;
+})[0];
+
+if (!targProject) {
+  return Astro.redirect("/404");
+}
+
+console.log("Target Project: ", targProject);
+---
+
+<PageLayout title={"Project: " + targProject.title}>
+  <h1>{targProject.title}</h1>
+  {
+    targProject.platform && (
+      <div class="platform">
+        <span>Platform</span> {targProject.platform}
+      </div>
+    )
+  }
+  <div class="project-image">
+    <img src={targProject.image.source} alt={targProject.image["alt-text"]} />
+  </div>
+  <div class="project-body">
+    <div class="project-description">
+      <h2>Project Info</h2>
+      <p>
+        {targProject.description}
+      </p>
+      <div class="skills">
+        <div class="skills--label">Skills Used</div>
+        <div class="skills--list">
+          {
+            targProject.languages.map((skill) => (
+              <div class="skills--skill">{skill}</div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="project-buttons">
+      {
+        targProject.repo && (
+          <a
+            class="repo-button"
+            href={targProject.repo}
+            title={"View code for " + targProject.title}
+            target="_blank"
+          >
+            Repo Code <i class="fa fa-external-link" aria-hidden="true" />
+          </a>
+        )
+      }
+      <a
+        class="project-button"
+        href={targProject.link.url}
+        target={targProject.link.external ? "_blank" : ""}
+        >View Project {
+          targProject.link.external ? (
+            <i class="fa fa-external-link" aria-hidden="true" />
+          ) : (
+            <i class="fa-solid fa-arrow-right" />
+          )
+        }</a
+      >
+    </div>
+  </div>
+</PageLayout>
+
+<style lang="scss">
+  img {
+    max-width: 100%;
+  }
+
+  .project-body {
+    display: grid;
+    grid-template-areas: "buttons description";
+    @media (max-width: 766px) {
+      grid-template-areas: "buttons" "description";
+    }
+  }
+
+  .project-buttons {
+    grid-area: buttons;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    gap: 15px;
+    width: 100%;
+    @media (min-width: 767px) {
+      border-right: 1px dashed #ffff;
+      padding: 15px 15px 0 0;
+    }
+
+    a {
+      background-color: var(--tertiary-color);
+      color: black;
+      text-decoration: none;
+      padding: 10px 10px;
+      text-align: center;
+
+      .repo-button {
+        background-color: var(--secondary-color) !important;
+        color: white;
+      }
+    }
+  }
+
+  .project-description {
+    grid-area: description;
+    margin: 0 10px;
+  }
+
+  .skills {
+    &--label {
+      text-decoration: underline;
+      margin-bottom: 10px;
+    }
+
+    &--list {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 10px;
+    }
+
+    &--skill {
+      background-color: var(--secondary-color);
+      padding: 5px;
+      border-radius: 20px;
+      //   font-weight: bold;
+      color: #ffff;
+    }
+  }
+</style>
