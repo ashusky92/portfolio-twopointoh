@@ -22,6 +22,7 @@ const currYear = new Date().getFullYear();
     display: grid;
     grid-template-areas: "copyright socials";
     justify-content: space-around;
+    align-items: center;
     margin-top: 50px;
     background-color: #0e141b;
     padding: 15px 0;
@@ -47,6 +48,18 @@ const currYear = new Date().getFullYear();
     span {
       color: var(--tertiary-color);
       font-weight: bold;
+    }
+
+    @media (max-width: 766px) {
+      flex-direction: column;
+
+      span {
+        text-decoration: underline;
+      }
+
+      i.fa-arrow-right {
+        display: none;
+      }
     }
   }
 
