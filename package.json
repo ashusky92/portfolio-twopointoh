@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^5.2.0",
+    "@astrojs/svelte": "^5.4.0",
     "@emailjs/browser": "^4.3.3",
     "@fontsource/vt323": "^5.0.12",
     "astro": "^4.5.12",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "sass": "^1.74.1",
+    "svelte": "^4.2.14",
+    "typescript": "^5.4.5",
     "uuid": "^9.0.1"
   }
 }

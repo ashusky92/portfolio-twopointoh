@@ -83,10 +83,18 @@ import TypedText from "../components/TypedText.astro";
     font-size: 4em;
     font-family: var(--title-font);
     margin: 0 0 15px;
+
+    @media (max-width: 766px) {
+      font-size: 3em;
+    }
   }
 
   h2 {
     font-weight: normal;
+
+    @media (max-width: 766px) {
+      font-size: 1.2em;
+    }
   }
 
   .hero {
@@ -179,6 +187,8 @@ import TypedText from "../components/TypedText.astro";
 
     @media (max-width: 767px) {
       margin: 0 15px;
+
+      font-size: 15px;
     }
 
     a.resume {

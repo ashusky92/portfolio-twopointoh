@@ -4,20 +4,30 @@ const { pageHeader = "" } = Astro.props;
 ---
 
 <header>
-  <h1><a href="/">&gt; Alex Husky<span class="blinking">_</span></a></h1>
-  <div class="header-nav">
-    <div class="menu-label">Menu:</div>
-    <Navigation />
+  <div class="header-content">
+    <h1><a href="/">&gt; Alex Husky<span class="blinking">_</span></a></h1>
+    <div class="header-nav">
+      <div class="menu-label">Menu:</div>
+      <Navigation />
+    </div>
+    <div class="header-social">
+      <a href="https://github.com/ashusky92" target="_blank"
+        ><i class="fa-brands fa-github"></i></a
+      >
+      <a href="https://www.linkedin.com/in/alex-husky/" target="_blank"
+        ><i class="fa-brands fa-linkedin"></i></a
+      >
+    </div>
   </div>
 </header>
 
 <style lang="scss">
-  header {
-    display: grid;
+  .header-content {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    grid-template-areas: "headerText headerNav";
+    padding: 0 30px;
+    grid-template-areas: "headerSocial headerText headerNav";
 
     > h1 {
       font-family: var(--title-font);
@@ -48,10 +58,29 @@ const { pageHeader = "" } = Astro.props;
           display: none;
         }
       }
+
+      @media (min-width: 767px) {
+        transform: translateX(-33%);
+      }
+    }
+
+    .header-social {
+      grid-area: headerSocial;
+      display: flex;
+      gap: 20px;
+      a {
+        color: white;
+        font-size: 30px;
+      }
+
+      @media (max-width: 766px) {
+        margin-top: 20px;
+      }
     }
 
     @media (max-width: 766px) {
       grid-template-areas: "headerText" "headerNav";
+      flex-direction: column;
       justify-content: center;
       background-color: var(--primary-background);
     }
