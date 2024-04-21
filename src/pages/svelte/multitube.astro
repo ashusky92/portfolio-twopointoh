@@ -1,0 +1,10 @@
+---
+import MultiTube from "../../components/svelte/YouTube-Watcher/MultiTubeApp.svelte";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const params = Astro.url.searchParams.get("videoList");
+---
+
+<PageLayout>
+  <MultiTube client:load videoListParams={params} />
+</PageLayout>
