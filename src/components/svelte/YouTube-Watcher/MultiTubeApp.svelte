@@ -72,7 +72,14 @@
 
   function shareLinkHandler() {
     let pageUrl = window.location.href;
-    let cleanPageUrl = pageUrl.slice(0, pageUrl.indexOf("?"));
+    let cleanPageUrl;
+
+    if (/\?/.test(pageUrl)) {
+      cleanPageUrl = pageUrl.slice(0, pageUrl.indexOf("?"));
+    } else {
+      cleanPageUrl = pageUrl;
+    }
+
     shareLinkValue = "";
     shareLinkValue =
       cleanPageUrl + "?videoList=" + encodeURIComponent(userLinks);
