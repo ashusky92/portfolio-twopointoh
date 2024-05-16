@@ -53,12 +53,28 @@
         "description": "The current site you're on!  This site is a combination of most of the skills I've learned over the last 5 years.  This site is built using Astro, which is a JavaScript frame work that handles both front-end and back-end.  I designed everything myself (with some slight inpiration from sites I found in my research phase).",
         "languages": ["HTML", "CSS", "JavaScript", "NodeJs" ,"Astro", "Component-Based Development"],
         "link": {
-            "url": "/",
+            "url": "",
             "external": false
         },
-        "repo":"",
+        "repo":"https://github.com/ashusky92/portfolio-twopointoh/tree/main",
         "image": {
             "source": "/images/portfolio-screenshot.png",
+            "alt-text": "Alex Husky Portfolio Site"
+        },
+        "platform": ""
+    },
+    {
+        "_id": "4",
+        "title": "YouTube Playlist Maker",
+        "description": "This was my very first projects using Svelte and had a lot of fun using it!  You can paste multiple links into the text area, then generate a list of YouTube videos which can be played directly on the site.",
+        "languages": ["HTML", "CSS", "JavaScript", "NodeJs" ,"Svelte", "Component-Based Development"],
+        "link": {
+            "url": "/svelte/multitube",
+            "external": false
+        },
+        "repo":"https://github.com/ashusky92/portfolio-twopointoh/tree/main/src/components/svelte/YouTube-Watcher",
+        "image": {
+            "source": "/images/multitube-viewer-screenshot.png",
             "alt-text": "Alex Husky Portfolio Site"
         },
         "platform": ""
