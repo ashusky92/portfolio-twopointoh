@@ -1,5 +1,7 @@
 ---
 import IndicatedLink from "./IndicatedLink.astro";
+
+const session = Astro.locals.session ?? null;
 ---
 
 <nav>
@@ -10,6 +12,15 @@ import IndicatedLink from "./IndicatedLink.astro";
     <li>
       <IndicatedLink label="Contact" url="/contact" />
     </li>
+    {
+      session && (
+        <li>
+          <form method="post" action="/api/signout">
+            <button>Sign out</button>
+          </form>
+        </li>
+      )
+    }
   </ul>
 </nav>
 

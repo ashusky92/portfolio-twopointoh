@@ -1,0 +1,64 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<script>
+  window.onload = function () {
+    document.getElementById("username").focus();
+  };
+</script>
+
+<PageLayout>
+  <div class="login-container">
+    <form method="post" action="/api/signin">
+      <h1>Sign In</h1>
+      <fieldset>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </fieldset>
+
+      <fieldset>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </fieldset>
+
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</PageLayout>
+
+<style lang="scss">
+  .form-container {
+    width: 100%;
+  }
+
+  form {
+    height: 100%;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  input[type="submit"] {
+    width: 96%;
+    font-size: 18px;
+    padding: 10px 0;
+    display: block;
+    margin: 15px auto 0;
+    border: none;
+  }
+
+  fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      padding: 10px;
+      font-size: 20px;
+      border-radius: 5px;
+      border: none;
+    }
+  }
+</style>
