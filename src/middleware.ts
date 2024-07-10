@@ -8,35 +8,63 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (!sessionId) {
     context.locals.user = null;
     context.locals.session = null;
-    return next();
+  } else {
+    try {
+      const { session, user } = await lucia.validateSession(sessionId);
+
+      if (session && session.fresh) {
+        const sessionCookie = lucia.createSessionCookie(session.id);
+        context.cookies.set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes
+        );
+      }
+
+      if (!session) {
+        const sessionCookie = lucia.createBlankSessionCookie();
+        context.cookies.set(
+          sessionCookie.name,
+          sessionCookie.value,
+          sessionCookie.attributes
+        );
+      }
+
+      context.locals.session = session;
+      context.locals.user = user;
+    } catch (error) {
+      context.locals.user = null;
+      context.locals.session = null;
+    }
   }
 
-  try {
-    const { session, user } = await lucia.validateSession(sessionId);
+  const requestUrl: URL = new URL(context.request.url);
 
-    if (session && session.fresh) {
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      context.cookies.set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes
+  //   Block unverfieid users from accessing admin
+  if (/^\/admin/.test(requestUrl.pathname)) {
+    if (!context.locals.session) {
+      return context.redirect(
+        "/login?message=" + encodeURI("You must sign in to access admin!")
       );
     }
+  }
 
-    if (!session) {
-      const sessionCookie = lucia.createBlankSessionCookie();
-      context.cookies.set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes
-      );
+  if (sessionId) {
+    if (
+      !(
+        context.locals.user.authLevel == "owner" ||
+        context.locals.user.authLevel == "admin"
+      )
+    ) {
+      console.log("Not the owner");
+      if (/\/manage-users/.test(requestUrl.pathname)) {
+        return context.redirect("/admin");
+      }
     }
+  }
 
-    context.locals.session = session;
-    context.locals.user = user;
-  } catch (error) {
-    context.locals.user = null;
-    context.locals.session = null;
+  if (/^\/contact/.test(requestUrl.pathname)) {
+    return context.redirect("/forms/contact");
   }
 
   return next();

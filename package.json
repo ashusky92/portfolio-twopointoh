@@ -10,24 +10,30 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^5.2.0",
-    "@astrojs/svelte": "^5.4.0",
+    "@astrojs/netlify": "^5.3.5",
+    "@astrojs/svelte": "^5.6.0",
     "@auth/core": "^0.32.0",
     "@emailjs/browser": "^4.3.3",
     "@fontsource/vt323": "^5.0.12",
     "@lucia-auth/adapter-mongodb": "^1.0.3",
-    "astro": "^4.5.12",
+    "@sendgrid/mail": "^8.1.3",
+    "astro": "^4.11.5",
     "auth": "^1.1.1",
     "auth-astro": "^4.1.2",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "lucia": "^3.2.0",
     "lucia-adapter-astrodb": "^0.0.9",
+    "mailtrap": "^3.3.0",
     "mongodb": "^6.8.0",
+    "nodemailer": "^6.9.14",
     "oslo": "^1.2.1",
     "sass": "^1.74.1",
     "svelte": "^4.2.14",
     "typescript": "^5.4.5",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.15"
   }
 }

@@ -16,6 +16,9 @@ interface UserDoc {
   _id: string;
   username: string;
   password_hash: string;
+  fname: string;
+  lname: string;
+  email: string;
 }
 
 interface SessionDoc {
@@ -34,6 +37,7 @@ export const lucia = new Lucia(adapter, {
     return {
       // attributes has the type of DatabaseUserAttributes
       username: attributes.username,
+      authLevel: attributes.auth_level,
     };
   },
 });
@@ -48,4 +52,8 @@ declare module "lucia" {
 interface DatabaseUserAttributes {
   username: string;
   password_hash: string;
+  fname: string;
+  lname: string;
+  email: string;
+  auth_level: string;
 }

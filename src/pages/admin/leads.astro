@@ -1,0 +1,138 @@
+---
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { MongoClient } from "mongodb";
+
+let data: any;
+
+const client = new MongoClient(import.meta.env.MONGODB_CONNECTION);
+
+try {
+  const db = client.db("portfoliodb");
+  const leads = db.collection("Leads");
+  data = await leads.find().toArray();
+} finally {
+  await client.close();
+}
+const leadCount = data.length;
+
+console.log(data);
+---
+
+<AdminLayout>
+  <h2>Leads</h2>
+  <h3>Lead Count: {leadCount}</h3>
+  <div class="lead-list">
+    {
+      leadCount > 0 ? (
+        data.map(({ name, email, phone, message, submission_date }) => (
+          <div class="lead-list__item">
+            <div class="lead-top">
+              <div class="lead-name">{name}</div>
+              <div class="lead-submit-date">{submission_date}</div>
+            </div>
+            <div class="lead-details">
+              <div class="lead-info email">
+                <a href={"mailto:" + email}>
+                  <i class="fa-solid fa-envelope" /> {email}
+                </a>
+              </div>
+              <div class="lead-info phone">
+                <i class="fa-solid fa-phone" />
+                {phone
+                  ? phone.replace(
+                      /^(1*|\+1*)*(\d{3})(\d{3})(\d{4})/,
+                      "($2) $3-$4"
+                    )
+                  : "No phone number provided."}
+              </div>
+              <div class="lead-info message">
+                <h3>Message</h3>
+                <div class="message-body">{message}</div>
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <div class="no-data">No Data Available</div>
+      )
+    }
+  </div>
+</AdminLayout>
+
+<style lang="scss">
+  .no-data {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+  }
+
+  .lead-list {
+    background-color: var(--secondary-color);
+    color: var(--primary-background);
+    padding: 15px;
+    border-radius: 15px;
+
+    &__item {
+      // padding-bottom: 15px;
+      background-color: #ffff;
+      border-radius: 15px;
+      margin: 0 0 15px;
+      padding: 10px;
+
+      &:last-child {
+        margin: 0;
+      }
+
+      .lead-details {
+        display: flex;
+        flex-flow: row wrap;
+        > div {
+          flex-basis: 50%;
+        }
+
+        > div.message {
+          flex-basis: 100%;
+          box-shadow: 0 2px 5px grey;
+          border-radius: 10px;
+          padding: 10px;
+          margin-top: 15px;
+
+          h3 {
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .lead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lead-details {
+    border-top: 1px solid var(--primary-background);
+  }
+
+  .lead-submit-date {
+    > span {
+      background-color: grey;
+      color: white;
+      border-radius: 10px;
+      margin: 10px 0;
+      padding: 5px;
+    }
+  }
+
+  .lead-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .lead-details {
+    padding: 15px;
+    margin-top: 15px;
+  }
+</style>

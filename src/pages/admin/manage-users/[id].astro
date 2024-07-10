@@ -1,0 +1,29 @@
+---
+import EditUserForm from "../../../components/svelte/Forms/EditUserForm.svelte";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { MongoClient, ObjectId } from "mongodb";
+
+const { id } = Astro.params;
+
+console.log("User ID: ", id);
+let userData: any;
+const client = new MongoClient(import.meta.env.MONGODB_CONNECTION);
+
+try {
+  const db = client.db("portfoliodb");
+  const users = db.collection("User");
+  userData = await users.findOne({ _id: id });
+} finally {
+  await client.close();
+}
+
+const { username, fname, lname, email } = userData;
+const data = { username, fname, lname, email };
+
+console.log(userData);
+---
+
+<AdminLayout>
+  <h2>Editing User - {username}</h2>
+  <EditUserForm client:load data={{ id, ...data }} />
+</AdminLayout>

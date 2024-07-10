@@ -1,0 +1,119 @@
+---
+const authLevel = Astro.locals.user.authLevel;
+const isOwner = authLevel === "owner";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Husky | Admin</title>
+
+    <script
+      src="https://kit.fontawesome.com/348e7a68b2.js"
+      crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="header-top">
+          <h1>Admin</h1>
+          <div class="signout">
+            <form method="post" action="/api/signout">
+              <button>Sign out</button>
+            </form>
+          </div>
+        </div>
+        <div class="navigation-container">
+          <nav>
+            <a href="/admin">Admin Home</a>
+            {isOwner && <a href="/admin/manage-users">User Management</a>}
+            <a href="/admin/leads">Leads</a>
+          </nav>
+          <div class="site-nav">
+            <a href="/">Go to Site Home</a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  :root {
+    --primary-background: #0e141b;
+    --secondary-color: #bb342f;
+    --tertiary-color: #e0ca3c;
+    --title-font: "VT323", serif;
+    --primary-font-color: #ffff;
+  }
+
+  body {
+    background-color: var(--primary-background);
+    color: var(--primary-font-color);
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    margin: 15px 0;
+  }
+
+  header {
+    .header-container {
+      display: block;
+      margin: 0 auto;
+      // padding: 0 50px;
+      max-width: 1200px;
+      width: 100%;
+
+      @media (max-width: 992px) {
+        padding: 0 10px;
+      }
+    }
+  }
+
+  nav {
+    display: flex;
+    gap: 10px;
+    a {
+      color: #ffff;
+      text-decoration: none;
+      border: 1px solid #ffff;
+      padding: 5px 10px;
+      transition: all 0.1s ease-in;
+
+      &:hover {
+        background-color: #ffff;
+        color: var(--primary-background);
+      }
+    }
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navigation-container {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+
+  .site-nav {
+    text-align: right;
+    a {
+      color: white;
+    }
+  }
+
+  main {
+    max-width: 1200px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+</style>

@@ -1,15 +1,9 @@
 ---
-const activeUser = Astro.locals.user;
-if (!activeUser) {
-  let message = encodeURI("You must login to access that page!");
-  return Astro.redirect("/login?message=" + message);
-}
-
-import PageLayout from "../../layouts/PageLayout.astro";
+import AdminLayout from "../../layouts/AdminLayout.astro";
 
 const session = Astro.locals.session;
 ---
 
-<PageLayout>
-  {session && <p>Welcome {session.userId}</p>}
-</PageLayout>
+<AdminLayout>
+  <h1>Admin Home</h1>
+</AdminLayout>

@@ -1,24 +1,23 @@
 ---
+if (Astro.locals.user) {
+  console.log("User Active! Redirecting");
+  return Astro.redirect("/admin");
+}
+
 import PageLayout from "../layouts/PageLayout.astro";
 ---
-
-<script>
-  window.onload = function () {
-    document.getElementById("username").focus();
-  };
-</script>
 
 <PageLayout>
   <div class="login-container">
     <form method="post" action="/api/signin">
       <h1>Sign In</h1>
       <fieldset>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
+        <label for="email">email - Required</label>
+        <input type="email" id="email" name="email" required autofocus />
       </fieldset>
 
       <fieldset>
-        <label for="password">Password</label>
+        <label for="password">Password - Required</label>
         <input type="password" id="password" name="password" required />
       </fieldset>
 

@@ -2,17 +2,13 @@ import { lucia } from "../../../auth";
 import { verify } from "@node-rs/argon2";
 import type { APIContext } from "astro";
 import { MongoClient } from "mongodb";
+import { isValidEmail } from "../../utilities/emailchecker";
 
 export async function POST(context: APIContext): Promise<Response> {
   const formData = await context.request.formData();
-  const username = formData.get("username");
-  if (
-    typeof username !== "string" ||
-    username.length < 3 ||
-    username.length > 31 ||
-    !/^[a-z0-9_-]+$/.test(username)
-  ) {
-    return new Response("Invalid username", {
+  const email = formData.get("email");
+  if (!isValidEmail(email.toString())) {
+    return new Response("Invalid email", {
       status: 400,
     });
   }
@@ -26,15 +22,17 @@ export async function POST(context: APIContext): Promise<Response> {
       status: 400,
     });
   }
-
+  let existingUser;
   const client = new MongoClient(import.meta.env.MONGODB_CONNECTION);
+  try {
+    const db = client.db("portfoliodb");
+    const users = db.collection("User");
+    existingUser = await users.findOne({ email: email });
+  } finally {
+    await client.close();
+  }
 
-  const db = client.db("portfoliodb");
-  const projects = db.collection("User");
-
-  const existingUser = await projects.findOne({ username: username });
   console.log("Existing User Data: ", existingUser);
-  await client.close();
 
   if (!existingUser) {
     return new Response("Incorrect username or password", {

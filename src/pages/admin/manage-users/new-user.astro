@@ -1,0 +1,22 @@
+---
+import CreateUserForm from "../../../components/svelte/Forms/CreateUserForm.svelte";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+---
+
+<AdminLayout>
+  <h2>Create New User</h2>
+  <CreateUserForm client:load />
+</AdminLayout>
+
+<style lang="scss">
+  fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  span.require {
+    font-style: italic;
+    color: rgb(201, 174, 53);
+  }
+</style>

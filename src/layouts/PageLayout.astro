@@ -2,7 +2,6 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "@fontsource/vt323";
-import { ViewTransitions } from "astro:transitions";
 
 const {
   title = Astro.url.pathname.replace("/", "").toUpperCase(),
@@ -25,6 +24,8 @@ const {
     <script
       src="https://kit.fontawesome.com/348e7a68b2.js"
       crossorigin="anonymous"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
   <body class={Astro.url.pathname.replace(/\//g, "")}>
     {!hideHeader && <Header />}
@@ -95,6 +96,28 @@ const {
       100% {
         opacity: 1;
       }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      border: inherit;
+      -webkit-text-fill-color: inherit;
+      -webkit-box-shadow: inherit;
+      transition: inherit;
+      background-color: inherit;
+    }
+
+    span.required {
+      font-style: italic;
+      color: grey;
+      font-size: 15px;
     }
   </style>
 </html>

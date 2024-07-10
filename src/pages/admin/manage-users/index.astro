@@ -1,0 +1,61 @@
+---
+import { MongoClient } from "mongodb";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+
+const uri = import.meta.env.MONGODB_CONNECTION;
+
+const client = new MongoClient(uri);
+
+// Get the database and collection on which to run the operation
+const database = client.db("portfoliodb");
+const user = database.collection("User");
+
+// Execute query
+const userData = await user.find().toArray();
+---
+
+<AdminLayout>
+  <h1>Manage Users</h1>
+  <div class="users">
+    <div class="column-title edit">Edit</div>
+    <div class="column-title username">Username</div>
+    <div class="column-title lname">First name</div>
+    <div class="column-title email">Last name</div>
+    <div class="column-title fname">Email</div>
+    <div class="column-title authlevel">Authorization Level</div>
+    {
+      userData.map(({ _id, username, fname, lname, email, auth_level }) => (
+        <>
+          <div class="user-data edit">
+            <a href={"/admin/manage-users/" + _id}>Edit User</a>
+          </div>
+          <div class="user-data username">{username}</div>
+          <div class="user-data fname">{fname}</div>
+          <div class="user-data lname">{lname}</div>
+          <div class="user-data email">{email}</div>
+          <div class="user-data authlevel">{auth_level}</div>
+        </>
+      ))
+    }
+  </div>
+</AdminLayout>
+
+<style lang="scss">
+  .users {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+
+    .column-title {
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    .user-data {
+      padding: 10px;
+      background-color: #ffff;
+      color: var(--primary-background);
+      text-align: center;
+      border-bottom: 1px solid var(--primary-background);
+    }
+  }
+</style>
